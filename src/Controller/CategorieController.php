@@ -10,7 +10,6 @@ class CategorieController extends AbstractController {
         if($_POST){
             $objCategorie = new Categorie();
             $objCategorie->setCategorie($_POST["Categorie"]);
-            $objCategorie->setIcon($_POST["Icon"]);
             //Exécuter l'insertion
             $id = $objCategorie->SqlAdd(BDD::getInstance());
             // Redirection
@@ -59,7 +58,6 @@ class CategorieController extends AbstractController {
         if($_POST){
             $objCategorie = new Categorie();
             $objCategorie->setCategorie($_POST["Categorie"]);
-            $objCategorie->setIcon($_POST["icon"]);
             $objCategorie->setId($id);
             //Exécuter la mise à jour
             $objCategorie->SqlUpdate(BDD::getInstance());
