@@ -7,6 +7,7 @@ class Article {
     private $Description;
     private $DateAjout;
     private $Auteur;
+    private $Categorie;
     private $ImageRepository;
     private $ImageFileName;
 
@@ -23,13 +24,14 @@ class Article {
 
     public function SqlAdd(\PDO $bdd){
         try {
-            $requete = $bdd->prepare("INSERT INTO articles (Titre, Description, DateAjout, Auteur, ImageRepository, ImageFilename) VALUES(:Titre, :Description, :DateAjout, :Auteur, :ImageRepository, :ImageFilename)");
+            $requete = $bdd->prepare("INSERT INTO articles (Titre, Description, DateAjout, Auteur, Categorie, ImageRepository, ImageFilename) VALUES(:Titre, :Description, :DateAjout, :Auteur, :Categorie, :ImageRepository, :ImageFilename)");
 
             $requete->execute([
                 "Titre" => $this->getTitre(),
                 "Description" => $this->getDescription(),
                 "DateAjout" => $this->getDateAjout(),
                 "Auteur" => $this->getAuteur(),
+                "Categorie" => $this->getCategorie(),
                 "ImageRepository" => $this->getImageRepository(),
                 "ImageFilename" => $this->getImageFileName(),
             ]);
@@ -42,13 +44,14 @@ class Article {
 
     public function SqlUpdate(\PDO $bdd){
         try {
-            $requete = $bdd->prepare("UPDATE articles set Titre= :Titre, Description = :Description, Auteur = :Auteur, DateAjout = :DateAjout, ImageRepository= :ImageRepository, ImageFilename= :ImageFilename WHERE Id = :Id");
+            $requete = $bdd->prepare("UPDATE articles set Titre= :Titre, Description = :Description, Auteur = :Auteur, Categorie = :Categorie, DateAjout = :DateAjout, ImageRepository= :ImageRepository, ImageFilename= :ImageFilename WHERE Id = :Id");
 
             $requete->execute([
                 "Titre" => $this->getTitre(),
                 "Description" => $this->getDescription(),
                 "DateAjout" => $this->getDateAjout(),
                 "Auteur" => $this->getAuteur(),
+                "Categorie" => $this->getCategorie(),
                 "ImageRepository" => $this->getImageRepository(),
                 "ImageFilename" => $this->getImageFileName(),
                 "Id" => $this->getId()
@@ -182,6 +185,24 @@ class Article {
     public function setAuteur($Auteur)
     {
         $this->Auteur = $Auteur;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorie()
+    {
+        return $this->Categorie;
+    }
+
+    /**
+     * @param mixed $Categorie
+     * @return Article
+     */
+    public function setCategorie($Categorie)
+    {
+        $this->Categorie = $Categorie;
         return $this;
     }
 

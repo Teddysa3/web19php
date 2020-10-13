@@ -20,6 +20,7 @@ class ApiArticleController {
           "Description" => $article->getDescription(),
           "DateAjout" => $article->getDateAjout(),
           "Auteur" => $article->getAuteur(),
+          "Categorie" => $article->getCategorie(),
         ];
 
         return json_encode($arrayArticle);
@@ -37,6 +38,7 @@ class ApiArticleController {
         $article->setDescription($_POST["Description"]);
         $article->setDateAjout($_POST["DateAjout"]);
         $article->setAuteur($_POST["Auteur"]);
+        $article->setCategorie($_POST["Categorie"]);
         $id = $article->SqlAdd(BDD::getInstance());
 
         return json_encode($id);

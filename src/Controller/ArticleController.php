@@ -3,6 +3,7 @@ namespace src\Controller;
 
 use src\Model\Article;
 use src\Model\BDD;
+use src\Model\Categorie;
 
 class ArticleController extends AbstractController {
 
@@ -13,12 +14,17 @@ class ArticleController extends AbstractController {
             $objArticle->setDescription($_POST["Description"]);
             $objArticle->setDateAjout($_POST["DateAjout"]);
             $objArticle->setAuteur($_POST["Auteur"]);
+            $objArticle->setCategorie($_POST["Categorie"]);
             //Exécuter l'insertion
             $id = $objArticle->SqlAdd(BDD::getInstance());
             // Redirection
             header("Location:/article/show/$id");
         }else{
-            return $this->twig->render("Article/add.html.twig");
+            $categories = new Categorie();
+            $datas = $categories->SqlGetAll(BDD::getInstance());
+            return $this->twig->render("Article/add.html.twig", [
+                "categorieList"=>$datas
+            ]);
         }
 
 
@@ -59,6 +65,7 @@ class ArticleController extends AbstractController {
             $objArticle->setDescription($_POST["Description"]);
             $objArticle->setDateAjout($_POST["DateAjout"]);
             $objArticle->setAuteur($_POST["Auteur"]);
+            $objArticle->setCategorie($_POST["Categorie"]);
             $objArticle->setId($id);
             //Exécuter la mise à jour
             $objArticle->SqlUpdate(BDD::getInstance());
@@ -85,6 +92,7 @@ class ArticleController extends AbstractController {
             $datedujour->modify("+1 day");
             shuffle($Titres);
             shuffle($Prenoms);
+            shuffle($Cat);
 
             //Objet Article
             $objArticle = new Article();
@@ -92,6 +100,7 @@ class ArticleController extends AbstractController {
             $objArticle->setDescription("Ceci est une excellent description");
             $objArticle->setDateAjout($datedujour->format("Y-m-d"));
             $objArticle->setAuteur($Prenoms[0]);
+            $objArticle->setCategorie($Cat[0]);
 
             //Exécuter l'insertion
             $objArticle->SqlAdd(BDD::getInstance());

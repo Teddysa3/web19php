@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Ajout de la catégorie :</h1>
+    <form method="post">
+        <input type="text" name="Categorie">
+        <select name="Auteur">
+            <option ><i class="fas fa-drumstick-bite"></i></option>
+            <option ><i class="fas fa-utensils"></i></option>
+            <option ><i class="fas fa-drumstick-bite"></i></option>
+            <option><i class="fas fa-cookie"></i>
+        </select>
+        <input type="submit" value="Enregistrer les modifications">
+    </form>
+
+{% endblock %}
